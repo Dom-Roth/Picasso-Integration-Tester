@@ -11,11 +11,13 @@
  *    after()                 Gets called after all tests are finished and disconnects from the API.
  *
  *    describe()              Runs the tests using Mocha.
- *    runAccountWalletTests()
+ *                            All tests can be found in the ./tests/ folder.
  **/
 
 import {ApiPromise, Keyring, WsProvider} from '@polkadot/api';
-import {AccountTests} from './tests/accountTests';
+import { QuerySystemAccountTests } from './tests/query/system/querySystemAccountTests';
+import { QueryTokenTests } from './tests/query/tokens/queryTokenTests';
+import { QueryCouncilTests } from './tests/query/council/queryCouncilTests';
 
 // ToDo: Change endpoint to be read from env variables or run parameters.
 const testSudoCommands = true;
@@ -53,10 +55,14 @@ after(async () => {
 });
 
 describe('Account Tests', () => {
-  runAccountWalletTests();
-  // ToDo
+  // Query.System.Account Tests
+  QuerySystemAccountTests.runQuerySystemAccountTests(api, walletAlice);
+
+  // Query.Token Tests
+  QueryTokenTests.runQueryTokenTests(api, walletAlice);
+
   // Governance Tests
-  runAccountGovernanceTests();
+  QueryCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
 
   // ToDo
   // Vault 101 Tests
@@ -69,44 +75,4 @@ describe('Account Tests', () => {
 
   // ToDo
   // Vesting tests
-  it('Vesting creation test', async () => {
-    // ToDo: Stub
-  });
-
-  it('Vesting add tokens test', async () => {
-    // ToDo: Stub
-  });
 });
-
-/**
- * Standard wallet tests
-**/
-function runAccountWalletTests() {
-  it('Wallet balance check should result >0', async () => {
-    await AccountTests.checkBalance(api, walletAlice.address);
-  });
-
-  // Asset tests
-  it('Get single asset amount', async () => {
-    await AccountTests.getSingleAssetAmount(api, walletAlice.address);
-  });
-
-  it('Get list of asset amounts', async () => {
-    await AccountTests.getListAssetAmounts(api, walletAlice.address);
-  });
-}
-
-/**
- * Tests governance functionalities
-**/
-async function runAccountGovernanceTests() {
-  if (testSudoCommands === true) {
-    it('Council.setMembers(newMembers, prime, oldCount) test', async () => {
-      await AccountTests.governanceSudoCouncilSetMembersTest(api, walletAlice);
-    });
-  }
-
-  it('Submit proposal test', async () => {
-    await AccountTests.governanceCouncilSubmitProposalTest(api, walletAlice);
-  });
-}
