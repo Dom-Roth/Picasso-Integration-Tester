@@ -18,6 +18,7 @@ import {ApiPromise, Keyring, WsProvider} from '@polkadot/api';
 import { QuerySystemAccountTests } from './tests/query/system/querySystemAccountTests';
 import { QueryTokenTests } from './tests/query/tokens/queryTokenTests';
 import { QueryCouncilTests } from './tests/query/council/queryCouncilTests';
+import { txCouncilTests } from './tests/tx/txCouncilTests';
 
 // ToDo: Change endpoint to be read from env variables or run parameters.
 const testSudoCommands = true;
@@ -62,7 +63,8 @@ describe('Account Tests', () => {
   QueryTokenTests.runQueryTokenTests(api, walletAlice);
 
   // Governance Tests
-  QueryCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
+  //QueryCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
+  txCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
 
   // ToDo
   // Vault 101 Tests
