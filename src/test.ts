@@ -14,48 +14,53 @@
  *                            All tests can be found in the ./tests/ folder.
  **/
 
-import {ApiPromise, Keyring, WsProvider} from '@polkadot/api';
+import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import { QuerySystemAccountTests } from './tests/query/system/querySystemAccountTests';
 import { QueryTokenTests } from './tests/query/tokens/queryTokenTests';
 import { QueryCouncilTests } from './tests/query/council/queryCouncilTests';
 import { txCouncilTests } from './tests/tx/txCouncilTests';
+import { KeyringPair } from '@polkadot/keyring/types';
+import { args } from './utils/args';
 
-// ToDo: Change endpoint to be read from env variables or run parameters.
-const testSudoCommands = true;
-const useTestnetWallets = true;
-const endpoint = 'ws://127.0.0.1:9988';
-const provider = new WsProvider(endpoint);
-let api:ApiPromise;
-let keyring:Keyring;
-
-// ToDo: Read public/private keys from external file to be usable in live environment.
-//       and ability to specify keys using env variables or using run parameters.
-let walletAlice;
-let walletBob;
-let walletCharlie;
-let walletDave;
-let walletEve;
-let walletFerdie;
-
-before(async () => {
-  api = await ApiPromise.create({provider: provider});
-  keyring = new Keyring({type: 'sr25519'});
-
-  if (useTestnetWallets === true) {
-    walletAlice = keyring.addFromUri('//Alice');
-    walletBob = keyring.addFromUri('//Bob');
-    walletCharlie = keyring.addFromUri('//Charlie');
-    walletDave = keyring.addFromUri('//Dave');
-    walletEve = keyring.addFromUri('//Eve');
-    walletFerdie = keyring.addFromUri('//Ferdie');
-  }
-});
-
-after(async () => {
-  api.disconnect();
-});
 
 describe('Account Tests', () => {
+  const testSudoCommands = true;
+  const useTestnetWallets = true;
+
+  let api:ApiPromise;
+  let keyring:Keyring;
+
+  // ToDo: Read public/private keys from external file to be usable in live environment.
+  //       and ability to specify keys using env variables or using run parameters.
+  let walletAlice: KeyringPair;
+  let walletBob: KeyringPair;
+  let walletCharlie: KeyringPair;
+  let walletDave: KeyringPair;
+  let walletEve: KeyringPair;
+  let walletFerdie: KeyringPair;
+
+  before(async () => {
+    const endpoint = `ws://${args.h}:${args.p}`;
+    const provider = new WsProvider(endpoint);
+    api = await ApiPromise.create({provider: provider});
+    keyring = new Keyring({type: 'sr25519'});
+  
+    if (useTestnetWallets === true) {
+      walletAlice = keyring.addFromUri('//Alice');
+      walletBob = keyring.addFromUri('//Bob');
+      walletCharlie = keyring.addFromUri('//Charlie');
+      walletDave = keyring.addFromUri('//Dave');
+      walletEve = keyring.addFromUri('//Eve');
+      walletFerdie = keyring.addFromUri('//Ferdie');
+    }
+  });
+  
+  after(async () => {
+    await api.disconnect();
+  });
+
+
+
   // Query.System.Account Tests
   QuerySystemAccountTests.runQuerySystemAccountTests(api, walletAlice);
 
@@ -64,7 +69,7 @@ describe('Account Tests', () => {
 
   // Governance Tests
   //QueryCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
-  txCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
+  txCouncilTests.runTxCouncilTests(api, walletAlice, testSudoCommands);
 
   // ToDo
   // Vault 101 Tests

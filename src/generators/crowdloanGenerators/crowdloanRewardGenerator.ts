@@ -1,11 +1,21 @@
 import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
+import minimist from 'minimist';
 import * as R from 'ramda';
+import { args } from '../../utils/args';
 
 /**
  * Contains all generation methods as static async functions
+ * 
+ * WARN: await Delay can cause problems!
 **/
 export class crowdloanRewardGenerator {
+  /**
+   * 
+   * @param { ApiPromise } api Connected API Promise.
+   * @param { KeyringPair } sudoKey with sudo access.
+   * @param { KeyringPair } walletAlice 
+   */
   public static async testCrowdloanRewards(api: ApiPromise, sudoKey: KeyringPair, walletAlice: KeyringPair) {
     /*
       Populate
@@ -29,7 +39,7 @@ export class crowdloanRewardGenerator {
     const populateHash =
       await api.tx.sudo.sudo(
         api.tx.crowdloanRewards.populate(accounts)
-      ).signAndSend(sudoKey);
+      ).signAndSend(sudoKey, { nonce: -1 });
     console.debug('Populated crowdloan with hash: ', populateHash.toHex());
 
     await delay();
@@ -37,7 +47,7 @@ export class crowdloanRewardGenerator {
     const initializeHash =
       await api.tx.sudo.sudo(
         api.tx.crowdloanRewards.initialize()
-      ).signAndSend(sudoKey);
+      ).signAndSend(sudoKey, { nonce: -1 });
 
     console.debug('Initialized crowdloan with hash: ', initializeHash.toHex());
 
@@ -61,10 +71,26 @@ export class crowdloanRewardGenerator {
           contributorRewardAccount.publicKey,
           { RelayChain: [contributor.publicKey, { Sr25519: proof }]}
         )
-      ).signAndSend(sudoKey);
+      ).signAndSend(sudoKey, { nonce: -1 });
 
     console.debug('Associated with hash: ', associateHash.toHex());
 
     //TODO(hussein-aitlahcen): check that we got the upfront liquidity in the reward account.
   }
+}
+
+async function main() {
+  const endpoint = `ws://${args.h}:${args.p}`;
+  // Instantiate the API
+  const provider = new WsProvider(endpoint);
+  const api = await ApiPromise.create({ provider: provider });
+  // Constuct the keyring after the API (crypto has an async init)
+  const keyring = new Keyring({ type: 'sr25519' });
+  const walletAlice = keyring.addFromUri('//Alice');
+  await crowdloanRewardGenerator.testCrowdloanRewards(api, walletAlice, walletAlice);
+  process.exit(0);
+}
+
+if (require.main === module) {
+  main();
 }

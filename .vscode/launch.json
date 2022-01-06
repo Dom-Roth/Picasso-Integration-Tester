@@ -5,8 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "npm ci && npm run test",
+            "command": "npm run test",
             "name": "Run tests",
+            "request": "launch",
+            "type": "node-terminal"
+        }, 
+        {
+            "command": "npx ts-mocha src/test.ts",
+            "name": "Debug test suite",
             "request": "launch",
             "type": "node-terminal"
         }, 
@@ -14,13 +20,39 @@
             "command": "npm ci && npm run init",
             "name": "Run devnet init",
             "request": "launch",
-            "type": "node-terminal"
+            "type": "node-terminal",
+        },
+        {
+            "command": "npm ci && npm run init_and_test",
+            "name": "Run devnet init and tests",
+            "request": "launch",
+            "type": "node-terminal",
         }, 
         {
             "command": "npm ci && npm run lint",
             "name": "Run lint check",
             "request": "launch",
             "type": "node-terminal"
-        }
+        },
+        // Debug Launch configurations for generators.
+        {
+            "command": "npx ts-node src/generators/testTransactionGenerator.ts ws://127.0.0.1:9988",
+            "name": "Debug Generator: testTransactionGenerator",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "npx ts-node src/generators/crowdloanRewardGenerator.ts ws://127.0.0.1:9988",
+            "name": "Debug Generator: crowdloanRewardGenerator",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        // Debug Launch configurations for tests.
+        {
+            "command": "npx ts-mocha src/tests/query/system/querySystemAccountTests.ts ws://127.0.0.1:9988",
+            "name": "Debug Test: querySystemAccountTests",
+            "request": "launch",
+            "type": "node-terminal"
+        },
     ]
 }

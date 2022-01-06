@@ -8,7 +8,7 @@ export class txCouncilTests {
   /**
   * Tests governance functionalities
   **/
-  static async runAccountGovernanceTests(api, walletAlice, testSudoCommands:boolean) {
+  static async runTxCouncilTests(api, walletAlice, testSudoCommands:boolean) {
     if (testSudoCommands === true) {
       it('Council.setMembers(newMembers, prime, oldCount) test', async () => {
         await txCouncilTests.governanceSudoCouncilSetMembersTest(api, walletAlice);
@@ -20,12 +20,12 @@ export class txCouncilTests {
     });
   }
 
-    /**
-     * First checks if walletKey is in council.members()
-     * Then submits a new proposal to council.propose()
-     * @param {ApiPromise} api Connected API Promise.
-     * @param {Object} walletKey generated key through Keyring class
-    **/
+  /**
+   * First checks if walletKey is in council.members()
+   * Then submits a new proposal to council.propose()
+   * @param {ApiPromise} api Connected API Promise.
+   * @param {Object} walletKey generated key through Keyring class
+  **/
   private static async governanceSudoCouncilSetMembersTest(api, walletKey) {
     // ToDo (D.Roth): STUB
   }
