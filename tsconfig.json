@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES2020",
+    "target": "ES2021",
     "moduleResolution": "node",
     "pretty": false,
     "noImplicitAny": false,
@@ -9,7 +9,8 @@
     "noImplicitReturns": false,
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "src/**/**.d.ts"]

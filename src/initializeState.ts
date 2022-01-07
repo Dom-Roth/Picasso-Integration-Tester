@@ -5,8 +5,8 @@
  **/
 import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
-import { testTransactionGenerator } from './generators/testTransactionGenerator';
-import { crowdloanRewardGenerator } from './generators/crowdloanRewardGenerator';
+import { testTransactionGenerator } from './generators/exampleGenerators/testTransactionGenerator';
+import { crowdloanRewardGenerator } from './generators/crowdloanGenerators/crowdloanRewardGenerator';
 
 
 // ToDo: Change endpoint to be read from env variables or run parameters.
@@ -28,6 +28,7 @@ async function createDefaultData(api: ApiPromise, sudoKey: KeyringPair) {
   await testTransactionGenerator.testTransaction(api, walletAlice, walletBob.address);
   await crowdloanRewardGenerator.testCrowdloanRewards(api, sudoKey, walletAlice);
   // ToDo: Add additional data generator calls here.
+  //       Consider splitting it up into groups of similiar generators, to keep it clean.
 }
 
 /**
@@ -53,5 +54,10 @@ async function main() {
   console.info('Creating dummy data...');
   await createDefaultData(api, walletAlice);
   console.info('Finished creating dummy data.');
+
+  api.disconnect();
 }
-main().catch(console.error).finally(() => process.exit());
+
+if (require.main === module) {
+  main().catch(console.error).finally(() => process.exit());
+}
