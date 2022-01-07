@@ -1,6 +1,6 @@
 {
   "name": "picasso-integration-tester",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Runs various integration tests for the composable picasso parachain.",
   "main": "src/main.js",
   "type": "commonjs",

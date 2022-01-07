@@ -78,19 +78,3 @@ export class crowdloanRewardGenerator {
     //TODO(hussein-aitlahcen): check that we got the upfront liquidity in the reward account.
   }
 }
-
-async function main() {
-  const endpoint = `ws://${args.h}:${args.p}`;
-  // Instantiate the API
-  const provider = new WsProvider(endpoint);
-  const api = await ApiPromise.create({ provider: provider });
-  // Constuct the keyring after the API (crypto has an async init)
-  const keyring = new Keyring({ type: 'sr25519' });
-  const walletAlice = keyring.addFromUri('//Alice');
-  await crowdloanRewardGenerator.testCrowdloanRewards(api, walletAlice, walletAlice);
-  process.exit(0);
-}
-
-if (require.main === module) {
-  main();
-}

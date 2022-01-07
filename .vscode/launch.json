@@ -11,7 +11,7 @@
             "type": "node-terminal"
         }, 
         {
-            "command": "npx ts-mocha src/test.ts",
+            "command": "npm ci && npx ts-mocha --full-trace --require src/utils/testSetup.js src/test.ts",
             "name": "Debug test suite",
             "request": "launch",
             "type": "node-terminal"
@@ -49,7 +49,7 @@
         },
         // Debug Launch configurations for tests.
         {
-            "command": "npx ts-mocha src/tests/query/system/querySystemAccountTests.ts ws://127.0.0.1:9988",
+            "command": "npm ci && npx ts-mocha --full-trace --require src/utils/testSetup.js src/tests/query/system/querySystemAccountTests.ts",
             "name": "Debug Test: querySystemAccountTests",
             "request": "launch",
             "type": "node-terminal"

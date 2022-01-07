@@ -1,75 +1,36 @@
-/* eslint-disable max-len */
 /**
  * Defines the tests to be run on the picasso parachain node.
  *
- * Settings will later be configured using either a configuration
- * file or using environment variables. Until then, please set
- * the constant variables below.
- *
- * Index:
- *    before()                Gets called before the tests and connects the API object.
- *    after()                 Gets called after all tests are finished and disconnects from the API.
- *
- *    describe()              Runs the tests using Mocha.
+ * describe()                 Runs the tests using Mocha.
  *                            All tests can be found in the ./tests/ folder.
  **/
 
-import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import { QuerySystemAccountTests } from './tests/query/system/querySystemAccountTests';
 import { QueryTokenTests } from './tests/query/tokens/queryTokenTests';
-import { QueryCouncilTests } from './tests/query/council/queryCouncilTests';
 import { txCouncilTests } from './tests/tx/txCouncilTests';
-import { KeyringPair } from '@polkadot/keyring/types';
-import { args } from './utils/args';
 
 
-describe('Account Tests', () => {
-  const testSudoCommands = true;
-  const useTestnetWallets = true;
 
-  let api:ApiPromise;
-  let keyring:Keyring;
+// Query Tests
 
-  // ToDo: Read public/private keys from external file to be usable in live environment.
-  //       and ability to specify keys using env variables or using run parameters.
-  let walletAlice: KeyringPair;
-  let walletBob: KeyringPair;
-  let walletCharlie: KeyringPair;
-  let walletDave: KeyringPair;
-  let walletEve: KeyringPair;
-  let walletFerdie: KeyringPair;
-
-  before(async () => {
-    const endpoint = `ws://${args.h}:${args.p}`;
-    const provider = new WsProvider(endpoint);
-    api = await ApiPromise.create({provider: provider});
-    keyring = new Keyring({type: 'sr25519'});
+describe('query.system Tests', function () {
   
-    if (useTestnetWallets === true) {
-      walletAlice = keyring.addFromUri('//Alice');
-      walletBob = keyring.addFromUri('//Bob');
-      walletCharlie = keyring.addFromUri('//Charlie');
-      walletDave = keyring.addFromUri('//Dave');
-      walletEve = keyring.addFromUri('//Eve');
-      walletFerdie = keyring.addFromUri('//Ferdie');
-    }
-  });
-  
-  after(async () => {
-    await api.disconnect();
-  });
-
-
-
   // Query.System.Account Tests
-  QuerySystemAccountTests.runQuerySystemAccountTests(api, walletAlice);
+  QuerySystemAccountTests.runQuerySystemAccountTests();
+});
 
+describe('query.token Tests', function() {
   // Query.Token Tests
-  QueryTokenTests.runQueryTokenTests(api, walletAlice);
+  QueryTokenTests.runQueryTokenTests();
+});
 
+// TX Tests
+
+describe('tx.council tests', function() {
   // Governance Tests
   //QueryCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
-  txCouncilTests.runTxCouncilTests(api, walletAlice, testSudoCommands);
+  txCouncilTests.runTxCouncilTests();
+});
 
   // ToDo
   // Vault 101 Tests
@@ -82,4 +43,4 @@ describe('Account Tests', () => {
 
   // ToDo
   // Vesting tests
-});
+

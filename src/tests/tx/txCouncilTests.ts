@@ -8,15 +8,15 @@ export class txCouncilTests {
   /**
   * Tests governance functionalities
   **/
-  static async runTxCouncilTests(api, walletAlice, testSudoCommands:boolean) {
-    if (testSudoCommands === true) {
+  static async runTxCouncilTests() {
+    if (global.testSudoCommands === true) {
       it('Council.setMembers(newMembers, prime, oldCount) test', async () => {
-        await txCouncilTests.governanceSudoCouncilSetMembersTest(api, walletAlice);
+        await txCouncilTests.governanceSudoCouncilSetMembersTest(global.api, global.walletAlice);
       });
     }
 
     it('Submit proposal test', async () => {
-      await txCouncilTests.governanceCouncilSubmitProposalTest(api, walletAlice);
+      await txCouncilTests.governanceCouncilSubmitProposalTest(global.api, global.walletAlice);
     });
   }
 

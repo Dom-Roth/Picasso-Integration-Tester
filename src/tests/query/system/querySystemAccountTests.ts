@@ -3,8 +3,6 @@
  * Contains all tests which are bound to a wallet.
 **/
 import { expect } from 'chai';
-import { KeyringPair } from '@polkadot/keyring/types';
-
  
 /**
 * QuerySystemAccountTests:class
@@ -16,9 +14,10 @@ export class QuerySystemAccountTests {
    * @param api 
    * @param walletAlice 
    */
-  static runQuerySystemAccountTests(api, walletAlice:KeyringPair) {
+  static runQuerySystemAccountTests() {
+    //let api, walletAlice:KeyringPair;
     it('Wallet balance check should result >0', async () => {
-      await QuerySystemAccountTests.checkBalance(api, walletAlice.address);
+      await QuerySystemAccountTests.checkBalance(global.api, global.walletAlice.address);
     });
   }
 

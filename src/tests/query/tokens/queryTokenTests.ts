@@ -6,14 +6,14 @@ import { expect } from "chai";
 **/
 export class QueryTokenTests {
   
-  public static async runQueryTokenTests(api, walletAlice) {  
+  public static async runQueryTokenTests() {  
     // Asset tests
     it('Get single asset amount', async () => {
-      await QueryTokenTests.getSingleAssetAmount(api, walletAlice.address);
+      await QueryTokenTests.getSingleAssetAmount(global.api, global.walletAlice.address);
     });
   
     it('Get list of asset amounts', async () => {
-      await QueryTokenTests.getListAssetAmounts(api, walletAlice.address);
+      await QueryTokenTests.getListAssetAmounts(global.api, global.walletAlice.address);
     });
   }
   
