@@ -1,8 +1,6 @@
 /**
  * Defines the tests to be run on the picasso parachain node.
- *
- * describe()                 Runs the tests using Mocha.
- *                            All tests can be found in the ./tests/ folder.
+ * All tests can be found in the ./tests/ folder.
  **/
 
 import { QueryCrowdloanRewardsTests } from './tests/query/crowdloanRewards/queryCrowdloanRewardsTests';

@@ -54,5 +54,11 @@
             "request": "launch",
             "type": "node-terminal"
         },
+        {
+            "command": "npm ci && npx ts-mocha --full-trace --require src/utils/testSetup.js src/tests/query/crowdloanRewards/queryCrowdloanRewardsTests.ts",
+            "name": "Debug Test: QueryCrowdloanRewardsTests",
+            "request": "launch",
+            "type": "node-terminal"
+        },
     ]
 }
