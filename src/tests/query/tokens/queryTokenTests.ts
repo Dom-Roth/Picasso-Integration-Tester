@@ -5,8 +5,7 @@ import { expect } from "chai";
  * 
 **/
 export class QueryTokenTests {
-  
-  public static async runQueryTokenTests() {  
+  public static runQueryTokenTests() {
     describe('query.token Tests', function() {
       // Asset tests
       it('Get single asset amount', async () => {

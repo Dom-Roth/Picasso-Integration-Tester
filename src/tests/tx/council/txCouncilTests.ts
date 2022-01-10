@@ -8,7 +8,7 @@ export class TxCouncilTests {
   /**
   * Tests governance functionalities
   **/
-  static async runTxCouncilTests() {
+  static runTxCouncilTests() {
     describe('tx.council tests', function() {
       if (global.testSudoCommands === true) {
         it('Council.setMembers(newMembers, prime, oldCount) test', async () => {

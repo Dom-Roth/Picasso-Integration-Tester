@@ -78,3 +78,28 @@ export class crowdloanRewardGenerator {
     //TODO(hussein-aitlahcen): check that we got the upfront liquidity in the reward account.
   }
 }
+
+async function main() {
+  const endpoint = 'ws://127.0.0.1:9988';
+  const provider = new WsProvider(endpoint);
+  // Instantiate the API
+  const api = await ApiPromise.create({ provider: provider });
+  // Constuct the keyring after the API (crypto has an async init)
+  const keyring = new Keyring({ type: 'sr25519' });
+
+  /*  Get keys for dev accounts.
+      ToDo (D. Roth): Read public/private keys from external file to be usable in live environment.
+            and ability to specify keys using env variables or using run parameters.
+  */
+  const walletAlice = keyring.addFromUri('//Alice');
+
+  console.info('Creating dummy data...');
+  await crowdloanRewardGenerator.testCrowdloanRewards(api, walletAlice, walletAlice);
+  console.info('Finished creating dummy data.');
+
+  api.disconnect();
+}
+
+if (require.main === module) {
+  main().catch(console.error).finally(() => process.exit());
+}

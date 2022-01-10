@@ -1,16 +1,11 @@
 /* eslint-disable no-trailing-spaces */
-/**
- * Contains all tests which are bound to a wallet.
-**/
 import { expect } from 'chai';
- 
-/**
-* QuerySystemAccountTests:class
-*    checkBalance(api)
-**/
+
+
 export class QuerySystemAccountTests {
   /**
-   * 
+   * Example Test
+   * Just checking if provided wallet balance >0.
    */
   static runQuerySystemAccountTests() {
     describe('query.system.account Tests', function () {

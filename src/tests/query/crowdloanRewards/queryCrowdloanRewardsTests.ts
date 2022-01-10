@@ -1,48 +1,39 @@
 /* eslint-disable no-trailing-spaces */
-/**
- * Contains all tests which are bound to a wallet.
-**/
 import { ApiPromise } from '@polkadot/api';
 import { expect } from 'chai';
-/**
-* QuerySystemAccountTests:class
-*    checkBalance(api)
-**/
+
+
 export class QueryCrowdloanRewardsTests {
   /**
    * 
-   * @param api 
-   * @param walletAlice 
    */
   public static runQueryCrowdloanRewardsTests() {
     describe('query.crowdloanRewards.account Tests', function () {
       it('STUB', async () => {
-        QueryCrowdloanRewardsTests.queryCrowdloanRewardsTest();
+        await QueryCrowdloanRewardsTests.queryCrowdloanRewardsTest();
       });
 
-      it('query.crowdloanRewards.claimedRewards Tests', function() {
-        QueryCrowdloanRewardsTests.queryCrowdloanRewardsClaimedRewardsTest();
+      it('query.crowdloanRewards.claimedRewards Tests', async function() {
+        await QueryCrowdloanRewardsTests.queryCrowdloanRewardsClaimedRewardsTest();
       });
 
-      it('query.crowdloanRewards.totalContributors Tests', function() {
-        QueryCrowdloanRewardsTests.queryCrowdloanRewardsTotalContributorsTest();
+      it('query.crowdloanRewards.totalContributors Tests', async function() {
+        await QueryCrowdloanRewardsTests.queryCrowdloanRewardsTotalContributorsTest();
       });
 
-      it('query.crowdloanRewards.totalRewards Tests', function() {
-        QueryCrowdloanRewardsTests.queryCrowdloanRewardsTotalRewardsTest();
+      it('query.crowdloanRewards.totalRewards Tests', async function() {
+        await QueryCrowdloanRewardsTests.queryCrowdloanRewardsTotalRewardsTest();
       });
 
-      it('query.crowdloanRewards.vestingBlockStart Tests', function() {
-        QueryCrowdloanRewardsTests.queryCrowdloanRewardsVestingBlockStartTest();
+      it('query.crowdloanRewards.vestingBlockStart Tests', async function() {
+        await QueryCrowdloanRewardsTests.queryCrowdloanRewardsVestingBlockStartTest();
       });
     });
   }
 
   /**
-  * Tests by checking the balance of the supplied account is >0
-  * @param {ApiPromise} api Connected API Promise.
-  * @param {string} walletAddress wallet public key
-  */
+   * 
+   */
   private static async queryCrowdloanRewardsTest() {
     // ToDo (D. Roth): STUB
     expect(true).to.equal(true);
@@ -103,4 +94,4 @@ export class QueryCrowdloanRewardsTests {
 }
 
 // Uncomment to debug
-QueryCrowdloanRewardsTests.runQueryCrowdloanRewardsTests();
+// QueryCrowdloanRewardsTests.runQueryCrowdloanRewardsTests();
