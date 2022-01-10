@@ -10,7 +10,7 @@
     "prepare": "npm run compile",
     "init": "node src/initializeState.js",
     "init_and_test": "npm run init && mocha src/test.js --reporter mochawesome",
-    "test": "mocha src/test.js --reporter mochawesome"
+    "test": "mocha src/test.js --require src/utils/testSetup.js --reporter mochawesome"
   },
   "directories": {
     "src": "./src",
