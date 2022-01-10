@@ -15,9 +15,10 @@ export class QuerySystemAccountTests {
    * @param walletAlice 
    */
   static runQuerySystemAccountTests() {
-    //let api, walletAlice:KeyringPair;
-    it('Wallet balance check should result >0', async () => {
-      await QuerySystemAccountTests.checkBalance(global.api, global.walletAlice.address);
+    describe('query.system.account Tests', function () {
+      it('Wallet balance check should result >0', async () => {
+        await QuerySystemAccountTests.checkBalance(global.api, global.walletAlice.address);
+      });
     });
   }
 

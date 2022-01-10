@@ -7,13 +7,15 @@ import { expect } from "chai";
 export class QueryTokenTests {
   
   public static async runQueryTokenTests() {  
-    // Asset tests
-    it('Get single asset amount', async () => {
-      await QueryTokenTests.getSingleAssetAmount(global.api, global.walletAlice.address);
-    });
-  
-    it('Get list of asset amounts', async () => {
-      await QueryTokenTests.getListAssetAmounts(global.api, global.walletAlice.address);
+    describe('query.token Tests', function() {
+      // Asset tests
+      it('Get single asset amount', async () => {
+        await QueryTokenTests.getSingleAssetAmount(global.api, global.walletAlice.address);
+      });
+    
+      it('Get list of asset amounts', async () => {
+        await QueryTokenTests.getListAssetAmounts(global.api, global.walletAlice.address);
+      });
     });
   }
   

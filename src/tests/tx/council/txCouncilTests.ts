@@ -3,20 +3,22 @@ import { Keyring } from "@polkadot/api";
 /**
  * 
 **/
-export class txCouncilTests {
+export class TxCouncilTests {
 
   /**
   * Tests governance functionalities
   **/
   static async runTxCouncilTests() {
-    if (global.testSudoCommands === true) {
-      it('Council.setMembers(newMembers, prime, oldCount) test', async () => {
-        await txCouncilTests.governanceSudoCouncilSetMembersTest(global.api, global.walletAlice);
-      });
-    }
+    describe('tx.council tests', function() {
+      if (global.testSudoCommands === true) {
+        it('Council.setMembers(newMembers, prime, oldCount) test', async () => {
+          await TxCouncilTests.governanceSudoCouncilSetMembersTest(global.api, global.walletAlice);
+        });
+      }
 
-    it('Submit proposal test', async () => {
-      await txCouncilTests.governanceCouncilSubmitProposalTest(global.api, global.walletAlice);
+      it('Submit proposal test', async () => {
+        await TxCouncilTests.governanceCouncilSubmitProposalTest(global.api, global.walletAlice);
+      });
     });
   }
 

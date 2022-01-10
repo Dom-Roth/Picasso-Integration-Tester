@@ -5,42 +5,29 @@
  *                            All tests can be found in the ./tests/ folder.
  **/
 
+import { QueryCrowdloanRewardsTests } from './tests/query/crowdloanRewards/queryCrowdloanRewardsTests';
 import { QuerySystemAccountTests } from './tests/query/system/querySystemAccountTests';
 import { QueryTokenTests } from './tests/query/tokens/queryTokenTests';
-import { txCouncilTests } from './tests/tx/txCouncilTests';
+import { TxCouncilTests } from './tests/tx/council/txCouncilTests';
 
 
 
 // Query Tests
 
-describe('query.system Tests', function () {
-  
-  // Query.System.Account Tests
-  QuerySystemAccountTests.runQuerySystemAccountTests();
-});
+// Query.System.Account Tests
+QuerySystemAccountTests.runQuerySystemAccountTests();
 
-describe('query.token Tests', function() {
-  // Query.Token Tests
-  QueryTokenTests.runQueryTokenTests();
-});
+// Query.Token Tests
+QueryTokenTests.runQueryTokenTests();
+
+// Query Crowdloan Rewards Tests
+QueryCrowdloanRewardsTests.runQueryCrowdloanRewardsTests();
+
 
 // TX Tests
 
-describe('tx.council tests', function() {
-  // Governance Tests
-  //QueryCouncilTests.runAccountGovernanceTests(api, walletAlice, testSudoCommands);
-  txCouncilTests.runTxCouncilTests();
-});
+// Governance Tests
+TxCouncilTests.runTxCouncilTests();
 
-  // ToDo
-  // Vault 101 Tests
 
-  // ToDo
-  // Swap Tests
-
-  // ToDo
-  // Liquidity Tests
-
-  // ToDo
-  // Vesting tests
-
+// RPC Tests
