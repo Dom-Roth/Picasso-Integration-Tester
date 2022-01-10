@@ -6,7 +6,7 @@
 import { QueryCrowdloanRewardsTests } from './tests/query/crowdloanRewards/queryCrowdloanRewardsTests';
 import { QuerySystemAccountTests } from './tests/query/system/querySystemAccountTests';
 import { QueryTokenTests } from './tests/query/tokens/queryTokenTests';
-import { TxCouncilTests } from './tests/tx/council/txCouncilTests';
+import { TxCrowdloanRewardsTests } from './tests/tx/crowdloanRewards/txCrowdloanRewardsTests';
 
 
 
@@ -24,8 +24,7 @@ QueryCrowdloanRewardsTests.runQueryCrowdloanRewardsTests();
 
 // TX Tests
 
-// Governance Tests
-TxCouncilTests.runTxCouncilTests();
-
+// TX Crowdloan Rewards Tests
+TxCrowdloanRewardsTests.runTxCrowdloanRewardsTests();
 
 // RPC Tests

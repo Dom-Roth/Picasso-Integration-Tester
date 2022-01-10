@@ -9,10 +9,7 @@ export class QueryCrowdloanRewardsTests {
    */
   public static runQueryCrowdloanRewardsTests() {
     describe('query.crowdloanRewards.account Tests', function () {
-      it('STUB', async () => {
-        await QueryCrowdloanRewardsTests.queryCrowdloanRewardsTest();
-      });
-
+      this.timeout(0);
       it('query.crowdloanRewards.claimedRewards Tests', async function() {
         await QueryCrowdloanRewardsTests.queryCrowdloanRewardsClaimedRewardsTest();
       });
@@ -29,14 +26,6 @@ export class QueryCrowdloanRewardsTests {
         await QueryCrowdloanRewardsTests.queryCrowdloanRewardsVestingBlockStartTest();
       });
     });
-  }
-
-  /**
-   * 
-   */
-  private static async queryCrowdloanRewardsTest() {
-    // ToDo (D. Roth): STUB
-    expect(true).to.equal(true);
   }
 
   /**
@@ -86,10 +75,9 @@ export class QueryCrowdloanRewardsTests {
    private static async queryCrowdloanRewardsVestingBlockStartTest() {
     // ToDo (D. Roth): Consider removing expected value test and only check for result type.
     console.debug('queryCrowdloanRewardsVestingBlockStartTest');
-    const expectedVestingBlockStart = 1;
     const vestingBlockStart = await global.api.query.crowdloanRewards.vestingBlockStart();
     expect(vestingBlockStart).to.satisfy((s)=>{return typeof(s) == typeof(Object)});
-    expect(parseInt(vestingBlockStart)).to.equal(expectedVestingBlockStart);
+    expect(parseInt(vestingBlockStart)).to.be.an('integer');
   }
 }
 
