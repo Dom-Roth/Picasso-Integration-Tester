@@ -31,7 +31,6 @@ export class TxCrowdloanRewardsTests {
       this.timeout(0);
       it('tx.crowdloanRewards.populate', async function () {
         await TxCrowdloanRewardsTests.txCrowdloanRewardsPopulateTest();
-        console.debug();
       });
 
       
@@ -42,7 +41,7 @@ export class TxCrowdloanRewardsTests {
   }
 
   /**
-   * tx.crowdloanRewards.populate
+   * Tests tx.crowdloanRewards.initialize successfully. SUDO Check!
    */
   private static async txCrowdloanRewardsInitializeTest() {
     // ToDo (D. Roth): Pass api and keyring instead of directly reading from global.
@@ -54,7 +53,6 @@ export class TxCrowdloanRewardsTests {
       ).signAndSend(sudoKey, { nonce: -1 }, ({ events=[], status }) => {
         console.debug('txCrowdloanRewardsInitializeTest: Transaction status:', status.type);
         if (status.isFinalized) {
-          console.debug('txCrowdloanRewardsInitializeTest: Finalized Transaction status:', status.type);
           events
             // find/filter for failed events
             .filter(({ event }) =>
@@ -84,7 +82,7 @@ export class TxCrowdloanRewardsTests {
   }
 
   /**
-   * 
+   * Tests tx.crowdloanRewards.populate successfully. SUDO Check!
    */
   private static async txCrowdloanRewardsPopulateTest() {
     // ToDo (D. Roth): Pass api and keyring instead of directly reading from global.
@@ -101,6 +99,7 @@ export class TxCrowdloanRewardsTests {
         global.api.tx.sudo.sudo(
           global.api.tx.crowdloanRewards.populate(accounts)
         ).signAndSend(sudoKey, { nonce: -1 }, ({ events=[], status }) => {
+          console.debug('txCrowdloanRewardsPopulateTest: Transaction status:', status.type);
           if (status.isFinalized) {
             events
             // find/filter for failed events
@@ -128,11 +127,11 @@ export class TxCrowdloanRewardsTests {
           }
         });
       });
-    }catch (exc) {
+    } catch (exc) {
       console.error(exc);
     }
   }
 }
 
 // Uncomment to debug
-TxCrowdloanRewardsTests.runTxCrowdloanRewardsTests();
+// TxCrowdloanRewardsTests.runTxCrowdloanRewardsTests();
