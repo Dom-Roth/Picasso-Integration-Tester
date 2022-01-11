@@ -66,11 +66,11 @@ export class TxBondedFinanceTests {
                 const { docs, method, section } = decoded;
 
                 console.log(`${section}.${method}: ${docs.join(' ')}`);
-                throw new Error('txCrowdloanRewardsPopulateTest: ExtrinsicFailed!');
+                throw new Error('txBondedFinanceOfferTest: ExtrinsicFailed!');
               } else {
                 // Other, CannotLookup, BadOrigin, no extra info
                 console.log(error.toString());
-                throw new Error('txCrowdloanRewardsPopulateTest: ExtrinsicFailed!');
+                throw new Error('txBondedFinanceOfferTest: ExtrinsicFailed!');
               }
             });
             // ToDo (D. Roth): Add checks
