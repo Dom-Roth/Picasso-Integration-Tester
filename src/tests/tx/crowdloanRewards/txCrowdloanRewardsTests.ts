@@ -1,6 +1,4 @@
 /* eslint-disable no-trailing-spaces */
-import { ApiPromise } from '@polkadot/api';
-import { expect } from 'chai';
 import R from 'ramda';
 import {Promise} from 'bluebird';
 
@@ -38,9 +36,7 @@ export class TxCrowdloanRewardsTests {
 
       
       it('tx.crowdloanRewards.initialize', async function () {
-        await TxCrowdloanRewardsTests.txCrowdloanRewardsInitializeTest().finally(function() {
-
-        });
+        await TxCrowdloanRewardsTests.txCrowdloanRewardsInitializeTest();
       });
     });
   }
@@ -80,11 +76,11 @@ export class TxCrowdloanRewardsTests {
                 throw new Error('txCrowdloanRewardsPopulateTest: ExtrinsicFailed!');
               }
             });
+            // ToDo (D. Roth): Add checks        
             resolve();
         }
       });
     });
-    // ToDo (D. Roth): Add checks
   }
 
   /**
@@ -105,10 +101,7 @@ export class TxCrowdloanRewardsTests {
         global.api.tx.sudo.sudo(
           global.api.tx.crowdloanRewards.populate(accounts)
         ).signAndSend(sudoKey, { nonce: -1 }, ({ events=[], status }) => {
-          console.debug('txCrowdloanRewardsPopulateTest: Transaction status:', status.type);
           if (status.isFinalized) {
-            console.debug('txCrowdloanRewardsPopulateTest: Finalized Transaction status:', status.type);
-
             events
             // find/filter for failed events
             .filter(({ event }) =>
@@ -130,6 +123,7 @@ export class TxCrowdloanRewardsTests {
                 throw new Error('txCrowdloanRewardsPopulateTest: ExtrinsicFailed!');
               }
             });
+            // ToDo (D. Roth): Add checks
             resolve();
           }
         });
@@ -137,9 +131,6 @@ export class TxCrowdloanRewardsTests {
     }catch (exc) {
       console.error(exc);
     }
-    
-    // ToDo (D. Roth): Add checks
-    
   }
 }
 
