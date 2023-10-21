@@ -44,7 +44,7 @@
     "bluebird": "^3.7.2",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "mocha": "latest",
     "mochawesome": "^7.0.1",
     "ramda": "^0.27.1"
